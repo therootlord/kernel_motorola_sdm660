@@ -1,4 +1,4 @@
-/* Copyright (c) 2014-2016, 2018 The Linux Foundation. All rights reserved.
+/* Copyright (c) 2014-2016, The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -233,7 +233,7 @@ static void usb_disconnect_work_fn(struct work_struct *work)
 
 	if (!atomic_read(&ch->connected) &&
 		driver->usb_connected && diag_mask_param())
-		diag_clear_masks(0);
+		diag_clear_masks(NULL);
 
 	usb_disconnect(ch);
 }
