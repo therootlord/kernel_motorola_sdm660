@@ -23,6 +23,7 @@
 #include <linux/spmi.h>
 #include <linux/platform_device.h>
 #include <linux/spinlock.h>
+#include <linux/alarmtimer.h>
 
 /* RTC/ALARM Register offsets */
 #define REG_OFFSET_ALARM_RW	0x40
@@ -609,6 +610,9 @@ static int qpnp_rtc_probe(struct platform_device *pdev)
 		rc = PTR_ERR(rtc_dd->rtc);
 		goto fail_rtc_enable;
 	}
+
+	/* Init power_on_alarm after adding rtc device */
+	power_on_alarm_init();
 
 	/* disable rtc alarm set by shipmode if exists */
 	if (qpnp_pon_check_shipmode_info()) {
